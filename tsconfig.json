@@ -1,0 +1,48 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "esnext",
+        "moduleResolution": "Node",
+        "strict": false,
+        "jsx": "preserve",
+        "jsxFactory": "h",
+        "jsxFragmentFactory": "Fragment",
+        "importHelpers": true,
+        "experimentalDecorators": true,
+        "strictFunctionTypes": false,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "isolatedModules": true,
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "sourceMap": true,
+        "baseUrl": ".",
+        "allowJs": false,
+        "resolveJsonModule": true,
+        "lib": [
+            "dom",
+            "esnext"
+        ],
+        "incremental": true,
+        "paths": {
+            "@/*": [
+                "src/*"
+            ],
+        },
+        "typeRoots": [
+            "./node_modules/@types/",
+            "./types"
+        ]
+    },
+    "include": [
+        "mock/*.ts",
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "types/*.d.ts",
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "**/*.js"
+    ]
+}
