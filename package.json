@@ -8,5 +8,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@types/lodash-es": "^4.17.10",
+    "lodash-es": "^4.17.21"
+  }
 }
