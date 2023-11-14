@@ -37,6 +37,8 @@ export const isArray = val => {
 };
 
 export const isEmpty = val => {
+    if (isNullOrUnDef(val)) return true;    
+
     if (isArray(val) || isString(val)) {
         return val.length === 0;
     }
@@ -48,8 +50,6 @@ export const isEmpty = val => {
     if (isObject(val)) {
         return Object.keys(val).length === 0;
     }
-
-    if (isNullOrUnDef) return true;
 
     return false;
 };
