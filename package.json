@@ -10,12 +10,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/json-bigint": "^1.0.4",
-    "@types/lodash-es": "^4.17.10",
-    "@types/nprogress": "^0.2.3",
     "json-bigint": "^1.0.0",
     "lodash-es": "^4.17.21",
     "nprogress": "^0.2.0",
     "query-string": "^8.1.0"
+  },
+  "devDependencies": {
+    "@types/json-bigint": "^1.0.4",
+    "@types/lodash-es": "^4.17.10",
+    "@types/nprogress": "^0.2.3",
+    "rollup": "^4.4.1",
+    "typescript": "^5.2.2"
   }
 }
