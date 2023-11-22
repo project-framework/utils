@@ -1,5 +1,5 @@
 // 数据处理函数
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep } from 'lodash-es';
 
 /** @description 返回满足指定条件的第一个子节 */
 export function findLatestNode(

@@ -1,4 +1,5 @@
 node_modules/
-npm-debug.*
 package-lock.json
+.rollup.cache/
+tsconfig.tsbuildinfo
 # .vscode/

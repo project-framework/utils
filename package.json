@@ -5,7 +5,7 @@
   "description": "前端业务代码常用工具库",
   "main": "lib/index.cjs.js",
   "scripts": {
-    "build": "rm -fr ./lib && rollup -c"
+    "build": "rollup -c"
   },
   "keywords": [
     "utils",
