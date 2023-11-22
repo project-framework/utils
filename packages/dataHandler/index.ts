@@ -1,18 +1,15 @@
-/** 处理数据 */
 // 数据处理函数
-import { cloneDeep } from 'lodash-es';
+import cloneDeep from 'lodash/cloneDeep';
 
-/**
- * 返回满足指定条件的第一个子节点
- * @param {any[]} tree 树
- * @param {(item: any) => boolean } cb 条件函数（参数item为当前的节点, 返回判断条件，结果为 true 则满足条件）
- * @param {string} children children 字段
- * @returns {any[]}
- */
-export const findLatestNode = (data, cb, children = 'children') => {
+/** @description 返回满足指定条件的第一个子节 */
+export function findLatestNode(
+    tree: Array<{ [key: string]: any }>,
+    cb: (item: any) => boolean, // 条件函数（参数item为当前的节点, 返回判断条件，结果为 true 则满足条件）
+    children = 'children', // children 字段
+): any {
     let res = null;
     try {
-        for (const item of data) {
+        for (const item of tree) {
             if (cb(item)) {
                 res = item;
                 throw new Error('catch you');
@@ -30,19 +27,19 @@ export const findLatestNode = (data, cb, children = 'children') => {
     return res;
 };
 
-/**
- * @description 收集满足条件的所有子节点（前序迭代遍历，保存的所有节点内的最后一个满足条件的子节点）
- * @param {any[]} tree 树
- * @param {(...arg: any[]) => boolean } cb 条件函数（返回判断条件，结果为 true 表示需要过略）
- * @param {string} children children 字段
- */
-export const collectLatestNodes = (tree, cb, children = 'children') => {
+/** @description 前序迭代遍历，收集数组中所有节点内最后一个满足条件的子节点 */
+export function collectLatestNodes(
+    tree: Array<{ [key: string]: any, children?: any[] }>,
+    cb: (...arg: any[]) => boolean, // cb 条件函数（返回判断条件，结果为 true 表示需要过略）
+    children = 'children', // children 字段
+) {
     const stack = cloneDeep(tree); // 栈结构
     let currNode = null;
     let res = [];
 
     while (stack.length) {
         currNode = stack.pop();
+        if (!currNode) continue;
         if (!currNode[children] && cb(currNode)) {
             res.push(currNode);
         }
@@ -53,14 +50,12 @@ export const collectLatestNodes = (tree, cb, children = 'children') => {
     return res;
 };
 
-/**
- * 根据节点属性，过略某些节点，并返回原数组（原数组改变）
- * @param {any[]} tree 树
- * @param {(...arg: any[]) => boolean } cb 条件函数（返回判断条件，结果为 true 表示需要过略）
- * @param {string} children children 字段
- * @returns {any[]} result 过略后的原数组
- */
-export const filterNodes = (tree, cb, children = 'children') => {
+/*** @description 根据节点属性，过略某些节点，并返回原数组（原数组改变）*/
+export function filterNodes(
+    tree: Array<{ [key: string]: any, children?: any[] }>,
+    cb: (...arg: any[]) => boolean, // cb 条件函数（返回判断条件，结果为 true 表示需要过略）
+    children = 'children'
+) {
     tree.forEach((item, index, arr) => {
         if (cb(item)) {
             arr.splice(index, 1);
@@ -75,17 +70,18 @@ export const filterNodes = (tree, cb, children = 'children') => {
 
 /**
  * @description 根据提供的属性，收集该节点所在的树的所有层级节点的属性
- * @param {{}} property 树节点对象（key-比对的属性 value-比对的值）
- * @param {any[]} tree 树
- * @param {string | undefined} attr 指定收集节点的某个属性(默认整个节点)
  * @returns {any[]} result 存放搜索到的树节点到顶部节点的路径节点或其属性
  */
-export const getNodesByProp = (property, tree, attr) => {
+export function getNodesByProp(
+    property: { [key: string]: any }, // 树节点对象（key-比对的属性 value-比对的值）
+    tree: Array<{ [key: string]: any }>,
+    attr: string | undefined, // attr 指定收集节点的某个属性(默认整个节点)
+): any[] {
     const key = Object.keys(property)[0];
     const value = property[key];
-    let result = [];
+    let result = [] as any[];
 
-    const traverse = (value, path, tree) => {
+    const traverse = (value: any, path: any[], tree: Array<{ [key: string]: any }>) => {
         if (!tree.length) return;
 
         for (let item of tree) {
