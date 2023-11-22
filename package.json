@@ -1,26 +1,46 @@
 {
-  "name": "utils",
+  "name": "@zamir/utils",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "author": "Zamir Zhang <https://github.com/Zhangyao719>",
+  "description": "前端业务代码常用工具库",
+  "main": "lib/index.cjs.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rm -fr ./lib && rollup -c"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "utils",
+    "typescript"
+  ],
+  "license": "MIT",
+  "files": [
+    "lib"
+  ],
+  "types": "lib/index.d.ts",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "json-bigint": "^1.0.0",
     "lodash-es": "^4.17.21",
     "nprogress": "^0.2.0",
-    "query-string": "^8.1.0",
-    "tslib": "^2.6.2"
+    "query-string": "^8.1.0"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.5",
     "@types/json-bigint": "^1.0.4",
     "@types/lodash-es": "^4.17.10",
     "@types/nprogress": "^0.2.3",
+    "postcss": "^8.4.31",
     "rollup": "^4.4.1",
+    "rollup-plugin-postcss": "^4.0.2",
+    "tslib": "^2.6.2",
     "typescript": "^5.2.2"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/project-framework/utils/issues"
+  },
+  "homepage": "https://github.com/project-framework/utils#readme"
 }
