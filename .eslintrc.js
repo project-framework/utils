@@ -28,6 +28,8 @@ module.exports = {
     parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
+        project: ['./tsconfig.base.json', './tsconfig.eslint.json', './tsconfig.json'],
+        tsconfigRootDir: __dirname,
     },
     plugins: ['@typescript-eslint'],
     rules: {
@@ -46,6 +48,9 @@ module.exports = {
         'import/no-dynamic-require': OFF,
         'import/no-named-as-default': OFF,
         'import/no-named-as-default-member': OFF,
+
+        '@typescript-eslint/explicit-function-return-type': OFF,
+        '@typescript-eslint/no-explicit-any': OFF,
 
         // 原生配置
         'default-param-last': OFF,
