@@ -1,0 +1,16 @@
+{
+    "editor.tabSize": 4,
+    "editor.guides.bracketPairs": "active",
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.formatOnPaste": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "eslint.enable": true,
+    "eslint.validate": [
+        "javascript",
+        "typescript",
+        "html"
+    ]
+}
