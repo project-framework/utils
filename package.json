@@ -14,7 +14,7 @@
   "lint-staged": {
     "packages/**/__test__/*.ts": "npm run test",
     "packages/**/*.ts": [
-      "npm run lint",
+      "npm run lint:eslint",
       "prettier --write"
     ]
   },
