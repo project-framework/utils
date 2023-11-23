@@ -6,16 +6,16 @@ interface BrowserInfo {
 const UserAgent = navigator.userAgent.toLowerCase();
 
 const browserList = {
-    Opera: UserAgent.indexOf('opera') > -1,
-    IE10: UserAgent.indexOf('compatible') > -1 && UserAgent.indexOf('msie') > -1,
-    IE11: !!UserAgent.match(/trident.*rv:11\./),
-    Firefox: UserAgent.indexOf('firefox') > -1,
-    Edge: UserAgent.indexOf('edg') > -1,
-    QQBrowser: /qqbrowser/.test(UserAgent),
-    UCBrowser: UserAgent.indexOf('ubrowser') > -1,
+    Opera: UserAgent.includes('opera'),
+    IE10: UserAgent.includes('compatible') && UserAgent.includes('msie'),
+    IE11: Boolean(UserAgent.match(/trident.*rv:11\./)),
+    Firefox: UserAgent.includes('firefox'),
+    Edge: UserAgent.includes('edg'),
+    QQBrowser: UserAgent.includes('qqbrowser'),
+    UCBrowser: UserAgent.includes('ubrowser'),
     WeixinBrowser: /micromessenger/i.test(UserAgent),
-    Safari: UserAgent.indexOf('safari') > -1 && UserAgent.indexOf('chrome') === -1,
-    Chrome: UserAgent.indexOf('chrome') > -1 && UserAgent.indexOf('safari') > -1,
+    Safari: UserAgent.includes('safari') && !UserAgent.includes('chrome'),
+    Chrome: UserAgent.includes('chrome') && UserAgent.includes('safari'),
 };
 
 type BrowserEnums = keyof typeof browserList;
@@ -40,32 +40,32 @@ export function getBrowser() {
             }
             case 'IE10':
             case 'IE11': {
-                const res = UserAgent.match(/(msie\s|trident.*rv:)([\w.]+)/)
+                const res = UserAgent.match(/(msie\s|trident.*rv:)([\w.]+)/);
                 if (res) versions = res[2];
                 break;
             }
             case 'Firefox': {
-                const res = UserAgent.match(/firefox\/([\d.]+)/)
+                const res = UserAgent.match(/firefox\/([\d.]+)/);
                 if (res) versions = res[1];
                 break;
             }
             case 'Edge': {
-                const res = UserAgent.match(/edge\/([\d.]+)/)
+                const res = UserAgent.match(/edge\/([\d.]+)/);
                 if (res) versions = res[1];
                 break;
             }
             case 'QQBrowser': {
-                const res = UserAgent.match(/qqbrowser\/([\d.]+)/)
+                const res = UserAgent.match(/qqbrowser\/([\d.]+)/);
                 if (res) versions = res[1];
                 break;
             }
             case 'UCBrowser': {
-                const res = UserAgent.match(/ubrowser\/([\d.]+)/)
+                const res = UserAgent.match(/ubrowser\/([\d.]+)/);
                 if (res) versions = res[1];
                 break;
             }
             case 'Safari': {
-                const res = UserAgent.match(/version\/([\d.]+)/)
+                const res = UserAgent.match(/version\/([\d.]+)/);
                 if (res) versions = res[1];
                 break;
             }
@@ -85,7 +85,7 @@ export function getBrowser() {
         }
         if (versions) {
             browserInfo.type = i;
-            browserInfo.versions = parseInt(versions, 10);
+            browserInfo.versions = parseInt(versions);
             break;
         }
     }

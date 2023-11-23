@@ -8,7 +8,7 @@
     "build": "rollup -c",
     "test": "jest",
     "coveralls": "jest --coverage",
-    "lint:eslint": "eslint --cache --max-warnings 0 \"{packages}/**/*.{js,ts}\" --fix"
+    "lint:eslint": "eslint --cache --max-warnings 0 \"packages/**/*.{js,ts}\" --fix"
   },
   "keywords": [
     "utils",

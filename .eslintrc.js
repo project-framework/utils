@@ -51,6 +51,7 @@ module.exports = {
 
         '@typescript-eslint/explicit-function-return-type': OFF,
         '@typescript-eslint/no-explicit-any': OFF,
+        '@typescript-eslint/strict-boolean-expressions': OFF,
 
         // 原生配置
         'default-param-last': OFF,

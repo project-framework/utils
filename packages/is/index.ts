@@ -1,40 +1,25 @@
+// eslint-disable-next-line @typescript-eslint/unbound-method
 const toString = Object.prototype.toString;
 
-export const is = (val: unknown, type: string) => {
-    return toString.call(val) === `[object ${type}]`;
-};
+export const is = (val: unknown, type: string) => toString.call(val) === `[object ${type}]`;
 
-export const isDef = (val: any) => {
-    return typeof val !== 'undefined';
-};
+export const isDef = (val: any) => typeof val !== 'undefined';
 
-export const isUnDef = (val: any) => {
-    return !isDef(val);
-};
+export const isUnDef = (val: any) => !isDef(val);
 
-export const isNull = (val: any) => {
-    return val === null;
-};
+export const isNull = (val: any) => val === null;
 
-export const isNullOrUnDef = (val: any) => {
-    return isUnDef(val) || isNull(val);
-};
+export const isNullOrUnDef = (val: any) => isUnDef(val) || isNull(val);
 
-export const isObject = (val: any) => {
-    return val !== null && is(val, 'Object');
-};
+export const isObject = (val: any) => val !== null && is(val, 'Object');
 
-export const isString = (val: any) => {
-    return is(val, 'String');
-};
+export const isString = (val: any) => is(val, 'String');
 
 export function isNumber(val: any) {
     return is(val, 'Number');
 }
 
-export const isArray = (val: any) => {
-    return val && Array.isArray(val);
-};
+export const isArray = (val: any) => Boolean(val) && Array.isArray(val);
 
 export const isEmpty = (val: any) => {
     if (isNullOrUnDef(val)) return true;
@@ -54,6 +39,4 @@ export const isEmpty = (val: any) => {
     return false;
 };
 
-export const isFunction = (val: any) => {
-    return typeof val === 'function';
-};
+export const isFunction = (val: any) => typeof val === 'function';

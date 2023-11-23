@@ -23,4 +23,4 @@ export {
     collectLatestNodes,
     filterNodes,
     getNodesByProp,
-} from './dataHandler'
+} from './dataHandler';
