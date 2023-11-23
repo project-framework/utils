@@ -1,0 +1,18 @@
+# http://editorconfig.org
+root = true
+
+[*]
+charset = utf-8
+indent_style = space              # 空格缩进
+indent_size = 4                   # 缩进空格为4个
+end_of_line = lf                  # 文件换行符是 linux 的 `\n`
+insert_final_newline = true       # 文件末尾添加一个空行
+trim_trailing_whitespace = true   # 不保留行末的空格
+
+[*.md]
+insert_final_newline = false
+trim_trailing_whitespace = false
+max_line_length = 0               # 在指定的字符数后强制换行。off 关闭此功能
+
+[package.json]                    # 对 package.json 生效
+indent_size = 2

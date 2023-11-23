@@ -1,5 +1,7 @@
 node_modules
+lib
 package.json
 .prettierrc.js
+jest.config.js
+rollup.config.js
 commitlint.config.js
-lib
