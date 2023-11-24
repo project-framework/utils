@@ -1,8 +1,13 @@
 {
   "name": "@zerozhang/utils",
+  "description": "前端业务代码常用工具库",
   "version": "1.0.0",
   "author": "Zamir Zhang <https://github.com/Zhangyao719>",
-  "description": "前端业务代码常用工具库",
+  "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "main": "lib/index.cjs.js",
   "scripts": {
     "build": "rollup -c",
