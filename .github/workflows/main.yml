@@ -34,7 +34,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: npm
+      - run: npm install
       # 测试，并生成测试覆盖率文件
       - run: npm run coveralls
       - run: npm run build
@@ -75,7 +75,7 @@ jobs:
         with:
           # node版本
           node-version: ${{ matrix.node-version }}
-      - run: npm
+      - run: npm install
       - run: npm run build
 
       # 读取当前版本号
