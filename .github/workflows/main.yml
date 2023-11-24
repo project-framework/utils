@@ -37,7 +37,10 @@ jobs:
       - run: npm install
       # 测试，并生成测试覆盖率文件
       - run: npm run coveralls
+      # 打包
       - run: npm run build
+      # 查看打包后的目录文件
+      - run: ls -a
 
       # 上报
       - name: 上报 Coveralls
