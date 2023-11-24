@@ -1,0 +1,115 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Node.js CI
+
+on:
+  # 通过推送或拉取主分支(main)事件触发工作流
+  push:
+    branches: [ "main" ]
+    # tags:
+    #   - "v*"
+  # pull_request:
+  #   branches: [ "main" ]
+
+jobs:
+  # 创建了一个名叫 'build' 的作业
+  build:
+    # 指定了操作系统为 'ubuntu-latest'
+    runs-on: ubuntu-latest
+
+    # 设置变量
+    strategy:
+      matrix:
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    # steps 代表一系列任务作为作业的一部分而被执行
+    steps:
+      # 检查仓库以便作业能正常访问
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm
+      # 测试，并生成测试覆盖率文件
+      - run: npm run coveralls
+      - run: npm run build
+
+      # 上报
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  # 创建 publish-npm 任务
+  publish-npm:
+    # 在 ubuntu 最新版本的虚拟机执行
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 18.x ]
+
+    steps:
+      # 检查并切换到 main 分支
+      - name: Checkout main branch
+        # 使用 actions/checkout 插件
+        uses: actions/checkout@v3
+
+      # 初始化缓存
+      - name:  Cache Initialization
+        uses: actions/cache@v3
+        id: cache-dependencies
+        with:
+          path: node_modules
+          key: ${{runner.OS}}-${{hashFiles('**/package-lock.json')}}
+
+      # 安装 node
+      - name: Node.js Setting
+        # 使用 actions/setup-node 插件
+        uses: actions/setup-node@v3
+        with:
+          # node版本
+          node-version: ${{ matrix.node-version }}
+      - run: npm
+      - run: npm run build
+
+      # 读取当前版本号
+      - name: Reading Current Version
+        id: version
+        uses: notiz-dev/github-action-json-property@release
+        with:
+          # 读取版本号
+          path: './package.json'
+          prop_path: 'version'
+
+      - run: echo ${{steps.version.outputs.prop}}
+
+      # 创建 Release
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./lib/index.umd.js
+          name: v${{steps.version.outputs.prop}}
+          tag_name: v${{steps.version.outputs.prop}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 发布 NPM 包
+      - name: Publish NPM package
+        # 执行发布代码
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          npm publish
+        env:
+          # 配置 npm access token 环境变量
+          NPM_TOKEN: ${{secrets.NPM_ACCESS_TOKEN}}
+
+      # 刷新缓存
+      - name: 刷新缓存
+        run: |
+          curl https://purge.jsdelivr.net/npm/iemotion-pic@latest/lib/name.json
