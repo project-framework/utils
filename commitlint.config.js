@@ -23,6 +23,7 @@ module.exports = {
                 'style', // 代码风格（不影响代码含义）
                 'ci', // 修改项目继续集成流程（Travis，Jenkins，GitLab CI，Circle等）
                 'chore', // 不涉及 src、test 的其他修改（构建过程或辅助工具的变更）
+                'workflow', // 流水线
                 'revert', // 回退
                 'types', // 类型声明
                 'release', // 版本发布
