@@ -40,7 +40,7 @@ jobs:
       - run: npm run build
 
       # 上报
-      - name: Coveralls
+      - name: 上报 Coveralls
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -56,12 +56,12 @@ jobs:
 
     steps:
       # 检查并切换到 main 分支
-      - name: Checkout main branch
+      - name: 检查 main 分支
         # 使用 actions/checkout 插件
         uses: actions/checkout@v3
 
       # 初始化缓存
-      - name:  Cache Initialization
+      - name: 初始化缓存
         uses: actions/cache@v3
         id: cache-dependencies
         with:
@@ -69,7 +69,7 @@ jobs:
           key: ${{runner.OS}}-${{hashFiles('**/package-lock.json')}}
 
       # 安装 node
-      - name: Node.js Setting
+      - name: 安装 Node.js
         # 使用 actions/setup-node 插件
         uses: actions/setup-node@v3
         with:
@@ -79,7 +79,7 @@ jobs:
       - run: npm run build
 
       # 读取当前版本号
-      - name: Reading Current Version
+      - name: 读取当前版本号
         id: version
         uses: notiz-dev/github-action-json-property@release
         with:
@@ -89,8 +89,7 @@ jobs:
 
       - run: echo ${{steps.version.outputs.prop}}
 
-      # 创建 Release
-      - name: Release
+      - name: 创建 Release
         uses: softprops/action-gh-release@v1
         with:
           files: ./lib/index.umd.js
@@ -99,8 +98,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # 发布 NPM 包
-      - name: Publish NPM package
+      - name: 发布 NPM 包
         # 执行发布代码
         run: |
           npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
@@ -109,7 +107,6 @@ jobs:
           # 配置 npm access token 环境变量
           NPM_TOKEN: ${{secrets.NPM_ACCESS_TOKEN}}
 
-      # 刷新缓存
       - name: 刷新缓存
         run: |
           curl https://purge.jsdelivr.net/npm/iemotion-pic@latest/lib/name.json
