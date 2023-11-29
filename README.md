@@ -1,11 +1,7 @@
-# Utils 大全
+<h1>Utils 大全</h1>
 
-整理收集项目中常用的一些 utils
+![npm](https://img.shields.io/npm/v/%40zerozhang%2Futils)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/project-framework/utils/main.yml)
+![GitHub license](https://img.shields.io/github/license/project-framework/utils?style=flat)
+![Coveralls branch](https://img.shields.io/coverallsCoverage/github/project-framework/utils)
 
-## useBrowser
-
-获取浏览器类型与版本
-
-## download
-
-使用 \<a> 标签下载文件
