@@ -5,7 +5,7 @@ import { cloneDeep } from 'lodash-es';
 export function findLatestNode(
     tree: Array<Record<string, any>>,
     cb: (item: any) => boolean, // 条件函数（参数item为当前的节点, 返回判断条件，结果为 true 则满足条件）
-    children = 'children', // children 字段
+    children = 'children' // children 字段
 ): any {
     let res = null;
     try {
@@ -25,13 +25,13 @@ export function findLatestNode(
         // log.error(e)
     }
     return res;
-};
+}
 
 /** @description 前序迭代遍历，收集数组中所有节点内最后一个满足条件的子节点 */
 export function collectLatestNodes(
-    tree: Array<{ [key: string]: any, children?: any[] }>,
+    tree: Array<{ [key: string]: any; children?: any[] }>,
     cb: (...arg: any[]) => boolean, // cb 条件函数（返回判断条件，结果为 true 表示需要过略）
-    children = 'children', // children 字段
+    children = 'children' // children 字段
 ) {
     const stack = cloneDeep(tree); // 栈结构
     let currNode = null;
@@ -48,11 +48,11 @@ export function collectLatestNodes(
         }
     }
     return res;
-};
+}
 
 /** * @description 根据节点属性，过略某些节点，并返回原数组（原数组改变） */
 export function filterNodes(
-    tree: Array<{ [key: string]: any, children?: any[] }>,
+    tree: Array<{ [key: string]: any; children?: any[] }>,
     cb: (...arg: any[]) => boolean, // cb 条件函数（返回判断条件，结果为 true 表示需要过略）
     children = 'children'
 ) {
@@ -66,7 +66,7 @@ export function filterNodes(
         }
     });
     return tree;
-};
+}
 
 /**
  * @description 根据提供的属性，收集该节点所在的树的所有层级节点的属性
@@ -75,14 +75,14 @@ export function filterNodes(
 export function getNodesByProp(
     property: Record<string, any>, // 树节点对象（key-比对的属性 value-比对的值）
     tree: Array<Record<string, any>>,
-    attr: string | undefined, // attr 指定收集节点的某个属性(默认整个节点)
+    attr: string | undefined // attr 指定收集节点的某个属性(默认整个节点)
 ): any[] {
     const key = Object.keys(property)[0];
     const value = property[key];
     let result = [] as any[];
 
     const traverse = (value: any, path: any[], tree: Array<Record<string, any>>) => {
-        if (tree.length) return;
+        if (!tree.length) return;
 
         for (const item of tree) {
             path.push(attr ? item[attr] : item);
@@ -99,4 +99,4 @@ export function getNodesByProp(
 
     traverse(value, [], tree);
     return result;
-};
+}
