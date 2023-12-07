@@ -1,20 +1,14 @@
 {
-  "extends": "./tsconfig.base.json",
-  "compilerOptions": {
-    "outDir": "lib",                                  /* Specify an output folder for all emitted files. */
-    "rootDir": "./packages",                          /* Specify the root folder within your source files. */
-  },
-  "include": [
-    "packages/**/*.ts",
-    "packages/**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "lib",
-    "test",
-    "example",
-    "**/*.md",
-    "**/__test__",
-  ]
+    "extends": "./tsconfig.base.json",
+    "compilerOptions": {
+        "outDir": "lib", /* Specify an output folder for all emitted files. */
+        "rootDir": "./packages", /* Specify the root folder within your source files. */
+    },
+    "include": [
+        "packages/**/*.ts",
+        "packages/**/*.tsx"
+    ],
+    "exclude": [
+        "packages/**/__tests__/*",
+    ]
 }
