@@ -9,11 +9,15 @@
     "registry": "https://registry.npmjs.org/"
   },
   "main": "lib/index.cjs.js",
+  "module": "lib/index.esm.js",
+  "jsnext:main": "lib/index.esm.js",
+  "browser": "lib/index.umd.js",
   "scripts": {
     "build": "rollup -c",
     "test": "jest",
     "coveralls": "jest --coverage",
     "lint:eslint": "eslint --cache --max-warnings 0 \"packages/**/*.{js,ts}\" --fix",
+    "lint:prettier": "prettier --write \"packages/**/*\"",
     "prepare": "husky install"
   },
   "lint-staged": {
