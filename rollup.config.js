@@ -3,6 +3,9 @@ const typescript = require('@rollup/plugin-typescript');
 const commonjs = require('@rollup/plugin-commonjs');
 const terser = require('@rollup/plugin-terser');
 const postcss = require('rollup-plugin-postcss');
+const alias = require('@rollup/plugin-alias');
+
+const projectRootDir = path.resolve(__dirname);
 
 module.exports = [
     {
@@ -30,6 +33,9 @@ module.exports = [
             },
         ],
         plugins: [
+            alias({
+                entries: [{ find: '@', replacement: path.resolve(projectRootDir, 'packages') }],
+            }),
             postcss({
                 minimize: true,
                 extensions: ['.css'],
@@ -39,7 +45,6 @@ module.exports = [
             resolve(),
             commonjs(),
             typescript({ module: 'ESNext' }),
-
         ],
     },
 ];
