@@ -18,9 +18,5 @@ export { jsonParser } from './json';
 export { searchParams } from './location';
 export { getBrowser } from './browser';
 export { downloadByUrl } from './download';
-export {
-    findLatestNode,
-    collectLatestNodes,
-    filterNodes,
-    getNodesByProp,
-} from './dataHandler';
+export { findLatestNode, collectLatestNodes, filterNodes, getNodesByProp } from './dataHandler';
+export { decimalCompute } from './math';

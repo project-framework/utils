@@ -164,6 +164,30 @@ function http (url) {
 }
 ```
 
+### 数学
+
+- [decimalCompute](https://github.com/project-framework/utils/blob/main/packages/math/decimal/index.ts#L11) 用于浮点运算，解决小数点精度丢失问题
+
+  参数：
+      1. `type` (string)：运算符，字符串 +、 -、 *、 /；
+      2. `numbers` (...number[])：计算的数值。
+
+  返回一个包含 `result` 和 `next` 函数的对象。`result` 为计算结果，`next` 是一个链式调用函数，可以一直往下进行浮点运算。
+
+  ```js
+  import { decimalCompute } from '@zerozhang/utils';
+  
+  0.1 + 0.2; // output: 0.30000000000000004 不符合预期
+  decimalCompute('+', 0.1, 0.2).result // output: 0.3 符合预期
+
+  0.123 * 0.3; // output: 0.036899999999999995 不符合预期
+  decimalCompute('*', 0.123, 0.3).result // output: 0.0369 符合预期
+  
+  // next 支持链式调用
+  (0.1 + 0.2) * 0.12; // output: 0.036000000000000004 不符合预期
+  decimalCompute('+', 0.1, 0.2).next('*', 0.12).result // 0.036 符合预期
+  ```
+
 ### 数据处理
 
 用于处理树形结构组成的数组，一般用于嵌套菜单、树形权限等场景。数据结构类似于以下形式：

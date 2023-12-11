@@ -21,7 +21,7 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "packages/**/__test__/*.ts": "npm run test",
+    "packages/**/__tests__/*.ts": "npm run test",
     "packages/**/*.ts": [
       "npm run lint:eslint",
       "prettier --write"
