@@ -3,11 +3,37 @@
   "description": "前端业务代码常用工具库",
   "version": "1.0.2",
   "author": "Zamir Zhang<https://github.com/Zhangyao719>",
+  "keywords": [
+    "utils",
+    "typescript",
+    "rollup",
+    "jest",
+    "esm",
+    "umd",
+    "cjs"
+  ],
+  "homepage": "https://github.com/project-framework/utils#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/project-framework/utils.git"
+  },
+  "bugs": {
+    "url": "https://github.com/project-framework/utils/issues"
+  },
   "private": false,
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 5%",
+    "not ie <= 9"
+  ],
   "main": "lib/index.cjs.js",
   "module": "lib/index.esm.js",
   "jsnext:main": "lib/index.esm.js",
@@ -27,20 +53,10 @@
       "prettier --write"
     ]
   },
-  "keywords": [
-    "utils",
-    "typescript",
-    "rollup",
-    "jest"
-  ],
-  "license": "MIT",
   "files": [
     "lib"
   ],
   "types": "lib/index.d.ts",
-  "engines": {
-    "node": ">=18.0.0"
-  },
   "dependencies": {
     "json-bigint": "^1.0.0",
     "lodash-es": "^4.17.21",
@@ -81,9 +97,5 @@
     "ts-jest": "^29.1.1",
     "tslib": "^2.6.2",
     "typescript": "^5.3.2"
-  },
-  "bugs": {
-    "url": "https://github.com/project-framework/utils/issues"
-  },
-  "homepage": "https://github.com/project-framework/utils#readme"
+  }
 }
