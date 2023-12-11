@@ -38,17 +38,19 @@ const { isEmpty } from require('@zerozhang/utils');
 console.log(isEmpty([])) // 输出 true
 console.log(isEmpty([1])) // 输出 false
 ```
-<!-- ### 在浏览器中使用
-如果直接在浏览器中使用，则不需要包管理。直接下载[release](https://github.com/SaebaRyoo/fe-utils/releases)中的index.umd.js,使用的是umd通用模块规范
 
-然后在浏览器中引用
+### 在浏览器中使用
+
+如果直接在浏览器中使用，则不需要包管理。直接下载 [release](https://github.com/project-framework/utils/releases) 中的 `index.umd.js`，使用的是 UMD 通用模块规范。
+
+然后在浏览器中引用：
+
 ```html
-<script src="index.umd.js"></script>
+<script src="./index.umd.js"></script>
 <script>
-    console.log(FE_utils.sum(1,2,3,4)) // 输出10
+    $utils.isNull(null) // output: true
 </script>
 ```
--->
 
 ## 📚 功能
 
