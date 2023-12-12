@@ -15,7 +15,7 @@ export {
 } from './is';
 export { NProgress };
 export { jsonParser } from './json';
-export { searchParams } from './location';
+export { searchParams, concatParams } from './location';
 export { getBrowser } from './browser';
 export { downloadByUrl } from './download';
 export { findLatestNode, collectLatestNodes, filterNodes, getNodesByProp } from './dataHandler';
