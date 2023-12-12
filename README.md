@@ -64,7 +64,7 @@ console.log(isEmpty([1])) // 输出 false
   console.log(getBrowser()); // output: { type: 'Chrome', versions: 119 }
   ```
 
-- [searchParams](https://github.com/project-framework/utils/blob/main/packages/location/index.ts#L4) 获取 URL 网址参数（search）或网址片段（hasn）的查询字符串
+- [searchParams](https://github.com/project-framework/utils/blob/main/packages/location/index.ts#L6) 获取 URL 网址参数（search）或网址片段（hasn）的查询字符串
   基于 [URLSearchParams](https://developer.mozilla.org/zh-CN/docs/Web/API/URLSearchParams) 实现的处理 URL 查询字符串的方法。
   
   ```js
@@ -77,6 +77,18 @@ console.log(isEmpty([1])) // 输出 false
   searchParams('?a=1&b=2', 'c');       // output: { c: null }
 
   // window.location.hash 同上。
+  ```
+
+- [concatParams](https://github.com/project-framework/utils/blob/main/packages/location/index.ts#L21) 拼接 URL 网址参数（search）或网址片段（hash）
+  
+  ```js
+  import { concatParams } from '@zerozhang/utils';
+
+  concatParams('http://localhost', { a: 1, b: 2 });
+  // output: http://localhost?a=1&b=2
+
+  concatParams('http://localhost', { a: 1, b: 2 }, '#');
+  // output: http://localhost#a=1&b=2
   ```
 
 ### 文件操作
