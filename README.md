@@ -257,3 +257,23 @@ function http (url) {
 
   getNodesByProp({ value: 212 }, data, 'value'); // output: ['2', '2-01', '2-02-02']
   ```
+
+### TypeScript 支持
+
+- [handleUnknownError](https://github.com/project-framework/utils/blob/main/packages/error/index.ts#L16) 用于处理在 TS 中使用 `try catch` 时，error 类型为 `unknown` 的场景。
+
+  返回一个固定类型为 `{ message: string; code?: number | string }` 的对象，避免了取值时 TS 的类型报错。
+
+  ```ts
+  import { handleUnknownError } from '@zerozhang/utils'
+
+  function handle () {
+    try {
+        // ...
+    } catch (error) {
+        const { message, code } = handleUnknownError(error);
+
+        // use message and code ...
+    }
+  }
+  ```
