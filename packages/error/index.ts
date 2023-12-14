@@ -1,21 +1,28 @@
-import { isObject } from '@/is';
+/** @description 处理 ts catch 中的 error 类型 */
+export function handleUnknownError<T extends Error>(error: unknown, format?: (error: any) => T): T {
+    if (error instanceof Error) return error as T;
 
-export type CommonError = Omit<Error, 'name'> & {
-    code?: number | string;
+    // 非常规错误允许自定义扩展 Error 类
+    if (format) return format(error);
+
+    // eslint-disable-next-line no-console
+    console.error(
+        'Warning: Expecting a `format` function to standardize error which is of type unknown.'
+    );
+    return error as T;
 }
 
-export function isCommonError(error: unknown): error is CommonError {
-    if (error instanceof Error) return true;
-    if (isObject(error) && 'message' in error) return true;
-    return false;
+interface HttpErrorProps {
+    code: number | string;
+    message: string;
+    [key: string]: any;
 }
 
-/**
- * @description 处理 ts catch 中的 error 类型
- */
-export function handleUnknownError(error: unknown) {
-    if (isCommonError(error)) return error;
+export class HttpError extends Error {
+    code: number | string;
 
-    // 非常规错误转成 CommonError
-    return { message: JSON.stringify(error) };
+    constructor(props: HttpErrorProps) {
+        super(props.message);
+        this.code = props.code;
+    }
 }

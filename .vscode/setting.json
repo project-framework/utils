@@ -12,5 +12,8 @@
         "javascript",
         "typescript",
         "html"
-    ]
+    ],
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }

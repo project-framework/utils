@@ -180,9 +180,10 @@ function http (url) {
 
 - [decimalCompute](https://github.com/project-framework/utils/blob/main/packages/math/decimal/index.ts#L11) 用于浮点运算，解决小数点精度丢失问题
 
-  参数：
-      1. `type` (string)：运算符，字符串 +、 -、 *、 /；
-      2. `numbers` (...number[])：计算的数值。
+  | 参数    | 是否可选 | 类型                  | 说明           |
+  | ------- | -------- | --------------------- | -------------- |
+  | type    | 必填     | 字面量：+、 -、 *、 / | 表示运算类型   |
+  | numbers | 必填     | ...number[]           | 参与运算的数值 |
 
   返回一个包含 `result` 和 `next` 函数的对象。`result` 为计算结果，`next` 是一个链式调用函数，可以一直往下进行浮点运算。
 
@@ -191,7 +192,7 @@ function http (url) {
   
   0.1 + 0.2; // output: 0.30000000000000004 不符合预期
   decimalCompute('+', 0.1, 0.2).result // output: 0.3 符合预期
-
+  
   0.123 * 0.3; // output: 0.036899999999999995 不符合预期
   decimalCompute('*', 0.123, 0.3).result // output: 0.0369 符合预期
   
@@ -272,20 +273,58 @@ function http (url) {
 
 ### TypeScript 支持
 
-- [handleUnknownError](https://github.com/project-framework/utils/blob/main/packages/error/index.ts#L16) 用于处理在 TS 中使用 `try catch` 时，error 类型为 `unknown` 的场景。
+- [handleUnknownError](https://github.com/project-framework/utils/blob/main/packages/error/index.ts#L2) 用于处理在 TS 中使用 `try catch` 时，error 类型为 `unknown` 的场景。
 
-  返回一个固定类型为 `{ message: string; code?: number | string }` 的对象，避免了取值时 TS 的类型报错。
+  | 参数   | 是否可选 | 类型                  | 说明                      |
+  | ------ | -------- | --------------------- | ------------------------- |
+  | error  | 必填     | unknown               | catch 捕获的 error        |
+  | format | 可选     | (error: unknown) => T | 格式化非 Error 类型的错误 |
 
-  ```ts
-  import { handleUnknownError } from '@zerozhang/utils'
+  1. 如果 error 为 `Error` 类型，直接返回：
 
-  function handle () {
-    try {
-        // ...
-    } catch (error) {
-        const { message, code } = handleUnknownError(error);
+     ```ts
+     try {
+         // some code
+     } catch (error) {
+         const { message } = handleUnknownError(error);
+         // use message ...
+     }
+     ```
 
-        // use message and code ...
-    }
-  }
-  ```
+  2. 支持传入基于 `Error` 类扩展的自定义 `Error` 泛型：
+
+     ```ts
+     interface HttpError extends Error {
+         code: number;
+     }
+     
+     try {
+         // some code
+     } catch (error) {
+         const { message, code } = handleUnknownError<HttpError>(error);
+         // use message and code ...
+     }
+     ```
+
+  3. 非常规 error（未知类型），可先自定义扩展 `CustomError` ，然后使用 `format` 函数格式化成 `CustomError` 需要的格式：
+
+     ```ts
+     // 自定义错误类
+     class CustomError extends Error {
+        constructor( public status: number, public statusText: string) {
+            super();
+        }
+     }
+
+     // 未知错误格式化
+     function format(err: any): CustomError {
+        return new CustomError(err.xxx, err.yyy)
+     }
+
+     try {
+         // some code
+     } catch (error) {
+         const { status, statusText } = handleUnknownError<CustomError>(error, format);
+         // use custom statusText and statusText ...
+     }
+     ```
