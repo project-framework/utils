@@ -12,14 +12,14 @@ const http = new FetchHttp({
     // other configuration: https://developer.mozilla.org/zh-CN/docs/Web/API/fetch
 });
 
-// 添加第二个请求拦截
+// 添加第一个请求拦截（后执行）
 http.interceptors.request.use(config => {
     console.log('🚀 ~ second config:', config);
     (config.headers as Headers).set('Authorization', 'Bearer ' + 'token');
     return config;
 });
 
-// 添加第一个请求拦截
+// 添加第二个请求拦截（先执行）
 http.interceptors.request.use(config => {
     console.log('🚀 ~ first config:', config);
     delete config.credentials;

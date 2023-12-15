@@ -328,3 +328,137 @@ function http (url) {
          // use custom statusText and statusText ...
      }
      ```
+
+### HTTP 请求
+
+- [FetchHttp](https://github.com/project-framework/utils/blob/main/packages/http/fetch/index.ts#L21) 基于原生 `fetch` 封装的类，像使用 `Axios` 一样去使用 `fetch` 吧~
+
+  1. 创建实例
+
+     ```ts
+     import { FetchHttp } from '@zerozhang/utils';
+     
+     const http = new FetchHttp({
+        mode: 'cors',
+        cache: 'default',
+        redirect: 'manual',
+        referrer: 'client',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        // ...other
+     });
+     ```
+
+     | 默认配置                | 值                                  | 说明                             |
+     | ----------------------- | ----------------------------------- | -------------------------------- |
+     | headers['Accept']       | 'application/json, text/plain, */*' | 可在实例化或使用 `request` 时覆盖 |
+     | headers['Content-Type'] | 'application/json'                  | 可在实例化或使用 `request` 时覆盖 |
+     | credentials             | 'include'                           | 可在实例化或使用 `request` 时覆盖 |
+     | 其他默认配置            | 与原生 fetch 相同                   | [fetch() 文档](https://developer.mozilla.org/zh-CN/docs/Web/API/fetch) |
+
+  2. 添加拦截器
+
+     ```ts
+     // 添加第一个请求拦截（后执行）
+     http.interceptors.request.use(config => {
+         (config.headers as Headers).set('Authorization', 'Bearer ' + 'token');
+         return config;
+     });
+     
+     // 添加第二个请求拦截（先执行）
+     http.interceptors.request.use(config => {
+         delete config.credentials;
+         return config;
+     });
+     
+     // 添加响应拦截
+     http.interceptors.response.use(
+         res => {
+             // todo: 处理返回的真实数据（即解析后的 response.body）
+             const data = res?.data ?? res;
+             return data;
+         },
+         error => {
+             // todo: 报错处理
+             window.alert(`${error.message} (${error.code})`);
+             return Promise.reject(error);
+         }
+     );
+     ```
+
+     **注意：**
+     拦截器本质是 `Promise` 的 `executor`，它们都存放在一个数组中，等待 Promise 链的调用。
+
+     请求拦截器相当于 `unshift` 到数组的前面，响应拦截器相当于 `push` 到数组的后面。
+
+     所以，**后添加的请求拦截器会先执行，而后添加的响应拦截器会后执行**。
+
+  3. 使用 `request`
+
+     | 参数   | 是否可选 | 类型               | 说明                        |
+     | ------ | -------- | -------------------| --------------------------- |
+     | url    | 必填     | string             | 请求 api                    |
+     | config | 可选     | FetchRequestConfig | 见下面 `FetchRequestConfig` |
+
+     `FetchRequestConfig` 在继承于 [RequestInit](https://microsoft.github.io/PowerBI-JavaScript/interfaces/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.requestinit.html) 类型的基础上额外支持两种属性：
+
+     | 属性       | 是否可选 | 类型                | 说明                        |
+     | ---------- | -------- | --------------------| --------------------------- |
+     | params     | 可选     | Record\<string, any\> | 网址查询参数                    |
+     | [readMethod](https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch#body) | 可选     | 字面量 'arrayBuffer' \| 'blob' \| 'formData' \| 'json' \| 'text' | 指定读取 `Response` 的方法，默认 `json` |
+
+     ```ts
+     http.request(
+        'https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits',
+        {
+            method: 'GET',
+            params: { name: 'zs', age: 18 },
+            readMethod: 'text',
+            headers: {
+                'X-GitHub-Api-Version': '2023-12-15'
+            },
+            // ......
+        }
+     );
+     ```
+
+  4. 使用原型上的 `get` 和 `post`
+     FetchHttp 提供了快捷的 `get` 和 `post`，您可以使用它们方便的发起请求。
+
+     `get` 参数：
+     | 参数   | 是否可选 | 类型                  | 说明                             |
+     | ------ | -------- | ----------------------| ---------------------------------|
+     | url    | 必填     | string                | 请求 api                         |
+     | params | 可选     | Record\<string, any\> | 网址查询参数                     |
+     | config | 可选     | FetchRequestConfig    | 见上述 `FetchRequestConfig` 类型 |
+
+     `post` 参数：
+     | 参数   | 是否可选 | 类型               | 说明                             |
+     | ------ | -------- | -------------------| --------------------------------|
+     | url    | 必填     | string             | 请求 api                         |
+     | data   | 可选     | 请求实体           | 请求实体                         |
+     | config | 可选     | FetchRequestConfig | 见上述 `FetchRequestConfig` 类型 |
+
+     ```ts
+     http.get(
+        'https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits',
+        { name: 'zs', age: 18 },
+        {
+            headers: { 'X-GitHub-Api-Version': '2023-12-15' },
+            credentials: 'include',
+        }
+     )
+
+     const form = new FormData();
+     formData.append('file', data);
+
+     http.post(
+        'https://yourapi.com',
+        form,
+        {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        }
+     )
+     ```

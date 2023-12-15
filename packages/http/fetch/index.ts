@@ -116,7 +116,7 @@ class FetchHttp extends BaseHttp {
         });
     }
 
-    async post(url: string, data: any, config: FetchRequestConfig = {}) {
+    async post(url: string, data?: any, config: FetchRequestConfig = {}) {
         // 根据 Content-Type 处理 body
         const contentType = super.getContentType(config.headers, 'application/json');
         const body = super.handleBody(data, contentType);
