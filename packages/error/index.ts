@@ -15,14 +15,18 @@ export function handleUnknownError<T extends Error>(error: unknown, format?: (er
 interface HttpErrorProps {
     code: number | string;
     message: string;
+    data: any;
     [key: string]: any;
 }
 
 export class HttpError extends Error {
     code: number | string;
 
+    data: any;
+
     constructor(props: HttpErrorProps) {
         super(props.message);
         this.code = props.code;
+        this.data = props.data;
     }
 }
