@@ -12,7 +12,7 @@ export function handleUnknownError<T extends Error>(error: unknown, format?: (er
     return error as T;
 }
 
-interface HttpErrorProps {
+export interface HttpErrorProps {
     code: number | string;
     message: string;
     data: any;
