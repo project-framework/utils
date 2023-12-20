@@ -45,7 +45,10 @@ module.exports = [
             }),
             resolve(),
             commonjs(),
-            typescript({ module: 'ESNext' }),
+            typescript({
+                tsconfig: './tsconfig.json',
+                compilerOptions: { incremental: false }
+            }),
         ],
     },
 ];

@@ -1,6 +1,6 @@
-type ComputeType = '+' | '-' | '*' | '/';
+export type ComputeType = '+' | '-' | '*' | '/';
 
-type DecimalCompute = (
+export type DecimalCompute = (
     type: ComputeType,
     ...args: number[]
 ) => {

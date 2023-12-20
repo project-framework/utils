@@ -1,8 +1,8 @@
-import NProgress from './progress';
-import FetchHttp from './http/fetch';
+export { default as NProgress } from './progress';
 
-export { NProgress };
-export { FetchHttp };
+export { default as FetchHttp } from './http';
+export type { Interceptor, FetchRequestConfig, FetchReadMethod } from './http';
+
 export {
     is,
     isDef,
@@ -16,10 +16,20 @@ export {
     isEmpty,
     isFunction,
 } from './is';
+
 export { jsonParser } from './json';
+
 export { searchParams, concatParams } from './location';
+
 export { getBrowser } from './browser';
+export type { BrowserInfo, BrowserEnums } from './browser';
+
 export { downloadByUrl } from './download';
+
 export { findLatestNode, collectLatestNodes, filterNodes, getNodesByProp } from './dataHandler';
+
 export { decimalCompute } from './math';
-export { handleUnknownError } from './error';
+export type { ComputeType, DecimalCompute } from './math';
+
+export { handleUnknownError, HttpError } from './error';
+export type { HttpErrorProps } from './error';

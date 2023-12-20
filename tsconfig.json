@@ -1,8 +1,8 @@
 {
     "extends": "./tsconfig.base.json",
     "compilerOptions": {
-        "outDir": "lib", /* Specify an output folder for all emitted files. */
-        "rootDir": "./packages", /* Specify the root folder within your source files. */
+        "outDir": "lib",
+        "rootDir": "./packages",
     },
     "include": [
         "packages/**/*.ts",

@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/return-await */
-import BaseHttp from '../index';
+import BaseHttp from '../http';
 import { concatParams } from '@/location';
 import InterceptorManager, { type Interceptor } from './interceptorManager';
 import dispatchRequest from './dispatchRequest';

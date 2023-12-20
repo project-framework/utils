@@ -44,7 +44,8 @@
     "coveralls": "jest --coverage",
     "lint:eslint": "eslint --cache --max-warnings 0 \"packages/**/*.{js,ts}\" --fix",
     "lint:prettier": "prettier --write \"packages/**/*\"",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "tsc": "tsc"
   },
   "lint-staged": {
     "packages/**/__tests__/*.ts": "npm run test",

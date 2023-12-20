@@ -1,4 +1,4 @@
-interface BrowserInfo {
+export interface BrowserInfo {
     type: string;
     versions: number | undefined;
 }
@@ -18,7 +18,7 @@ const browserList = {
     Chrome: UserAgent.includes('chrome') && UserAgent.includes('safari'),
 };
 
-type BrowserEnums = keyof typeof browserList;
+export type BrowserEnums = keyof typeof browserList;
 
 // 获取浏览器类型
 export function getBrowser() {
