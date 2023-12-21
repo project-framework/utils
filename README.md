@@ -91,6 +91,16 @@ console.log(isEmpty([1])) // 输出 false
   // output: http://localhost#a=1&b=2
   ```
 
+- [openLink](https://github.com/project-framework/utils/blob/main/packages/link/index.ts#L1) 打开链接
+
+  ```js
+  import { openLink } from '@zerozhang/utils';
+
+  openLink('https://www.baidu.com'); // 默认新窗口打开
+
+  openLink('https://www.baidu.com', '_self')
+  ```
+
 ### 文件操作
 
 - [downloadByUrl](https://github.com/project-framework/utils/blob/main/packages/download/index.ts#L3) 通过 url 下载文件

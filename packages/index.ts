@@ -41,3 +41,6 @@ export type { ComputeType, DecimalCompute } from './math';
 
 export { handleUnknownError, HttpError } from './error';
 export type { HttpErrorProps } from './error';
+
+export { openLink } from './link';
+export type { Target } from './link';
