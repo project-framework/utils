@@ -69,18 +69,18 @@ console.log(isEmpty([1])) // 输出 false
   
   ```js
   import { searchParams } from '@zerozhang/utils';
-
+  
   // 获取 window.location.search 查询字符串
   searchParams('?a=1&b=2', 'a');       // output: { a: '1' }
   searchParams('?a=1&b=2', 'a','b');   // output: { a: '1', b: '2' }
   searchParams('?a=1&b=2', ['a','b']); // output: { a: '1', b: '2' }
   searchParams('?a=1&b=2', 'c');       // output: { c: null }
-
+  
   // window.location.hash 同上。
   ```
 
 - [concatParams](https://github.com/project-framework/utils/blob/main/packages/location/index.ts#L21) 拼接 URL 网址参数（search）或网址片段（hash）
-  
+
   ```js
   import { concatParams } from '@zerozhang/utils';
 
@@ -95,9 +95,9 @@ console.log(isEmpty([1])) // 输出 false
 
   ```js
   import { openLink } from '@zerozhang/utils';
-
+  
   openLink('https://www.baidu.com'); // 默认新窗口打开
-
+  
   openLink('https://www.baidu.com', '_self')
   ```
 
@@ -109,22 +109,6 @@ console.log(isEmpty([1])) // 输出 false
   import { downloadByUrl } from '@zerozhang/utils';
   
   downloadByUrl('http://www.下载地址.com', '文件名');
-  ```
-
-### JSON 操作
-
-- [jsonParser](https://github.com/project-framework/utils/blob/main/packages/json/index.ts#L2) 解析 JSON
-
-  ```js
-  import { jsonParser } from '@zerozhang/utils';
-  
-  // 标准 JOSN 格式
-  jsonParser('{ "name": "James", "age": 18 }');    // output: { name: 'James', age: 18 }
-  jsonParser('xxx');                               // output: null
-  jsonParser({});                                  // output: null
-
-  // 支持传入 reviver 转换器
-  jsonParser('{"p": 5}', (k, v) => k ? v * 2 : v); // output: { p: 10 }
   ```
 
 ### 验证函数
@@ -169,7 +153,7 @@ console.log(isEmpty([1])) // 输出 false
 
   ```js
     import { isEmpty } from '@zerozhang/utils';
-
+  
     isEmpty(null);                  // true
     isEmpty(undefined);             // true
     isEmpty(123);                   // false
@@ -202,6 +186,34 @@ function http (url) {
 }
 ```
 
+### 数据操作
+
+- [jsonParser](https://github.com/project-framework/utils/blob/main/packages/json/index.ts#L2) 解析 JSON
+
+  ```js
+  import { jsonParser } from '@zerozhang/utils';
+  
+  // 标准 JOSN 格式
+  jsonParser('{ "name": "James", "age": 18 }');    // output: { name: 'James', age: 18 }
+  jsonParser('xxx');                               // output: null
+  jsonParser({});                                  // output: null
+
+  // 支持传入 reviver 转换器
+  jsonParser('{"p": 5}', (k, v) => k ? v * 2 : v); // output: { p: 10 }
+  ```
+
+- [SessionStorageProxy](https://github.com/project-framework/utils/blob/main/packages/storage/index.ts#L9) 封装 storage，更方便使用
+
+  ```js
+   import { storageSession, storageLocal } from '@zerozhang/utils';
+  
+   storageSession.setItem('user', { name: 'James', age: 18 }); // 自动 JSON.stringify
+   storageSession.getItem('user'); // 自动 JSON.parse
+   storageSession.removeItem('user');
+   storageSession.clear();
+  
+   // storageLocal 同理
+
 ### 数学
 
 - [decimalCompute](https://github.com/project-framework/utils/blob/main/packages/math/decimal/index.ts#L11) 用于浮点运算，解决小数点精度丢失问题
@@ -227,43 +239,43 @@ function http (url) {
   decimalCompute('+', 0.1, 0.2).next('*', 0.12).result // 0.036 符合预期
   ```
 
-### 数据处理
+### 算法处理
 
 用于处理树形结构组成的数组，一般用于嵌套菜单、树形权限等场景。数据结构类似于以下形式：
 
 ```js
-    const data = [
-        {
-            id: '1',
-            value: 1,
-            children: [
-                { id: '1-01', value: 12 },
-                {
-                    id: '1-02',
-                    value: 13,
-                    children: [
-                        { id: '1-02-01', value: 131 },
-                        { id: '1-02-02', value: 132 },
-                    ]
-                }
-            ]
-        },
-        {
-            id: '2',
-            value: 2,
-            children: [
-                {
-                    id: '2-01',
-                    value: 21,
-                    children: [
-                        { id: '2-02-01', value: 211, },
-                        { id: '2-02-02', value: 212, },
-                    ]
-                },
-                { id: '2-02', value: 22, }
-            ]
-        }
-    ]
+const data = [
+    {
+        id: '1',
+        value: 1,
+        children: [
+            { id: '1-01', value: 12 },
+            {
+                id: '1-02',
+                value: 13,
+                children: [
+                    { id: '1-02-01', value: 131 },
+                    { id: '1-02-02', value: 132 },
+                ]
+            }
+        ]
+    },
+    {
+        id: '2',
+        value: 2,
+        children: [
+            {
+                id: '2-01',
+                value: 21,
+                children: [
+                    { id: '2-02-01', value: 211, },
+                    { id: '2-02-02', value: 212, },
+                ]
+            },
+            { id: '2-02', value: 22, }
+        ]
+    }
+]
 ```
 
 - [findLatestNode](https://github.com/project-framework/utils/blob/main/packages/dataHandler/index.ts#L5) 查找到满足条件的第一个子节点
@@ -293,7 +305,7 @@ function http (url) {
 
   ```js
   import { getNodesByProp } from '@zerozhang/utils';
-
+  
   getNodesByProp({ value: 212 }, data, 'value'); // output: ['2', '2-01', '2-02-02']
   ```
 
@@ -341,12 +353,12 @@ function http (url) {
             super();
         }
      }
-
+     
      // 未知错误格式化
      function format(err: any): CustomError {
         return new CustomError(err.xxx, err.yyy)
      }
-
+     
      try {
          // some code
      } catch (error) {
@@ -476,10 +488,10 @@ function http (url) {
             credentials: 'include',
         }
      )
-
+     
      const form = new FormData();
      formData.append('file', data);
-
+     
      http.post(
         'https://yourapi.com',
         form,
