@@ -11,13 +11,17 @@ export const isNull = (val: any): val is null => val === null;
 
 export const isNullOrUnDef = (val: any) => isUnDef(val) || isNull(val);
 
-export const isObject = (val: any): val is Record<string, any> => val !== null && is(val, 'Object');
-
 export const isString = (val: any): val is string => is(val, 'String');
 
 export function isNumber(val: any): val is number {
     return is(val, 'Number');
 }
+
+export function isBoolean(val: unknown): val is boolean {
+    return is(val, 'Boolean');
+}
+
+export const isObject = (val: any): val is Record<string, any> => val !== null && is(val, 'Object');
 
 export const isArray = (val: any): val is any[] => Boolean(val) && Array.isArray(val);
 
@@ -39,4 +43,31 @@ export const isEmpty = (val: any) => {
     return false;
 };
 
-export const isFunction = (val: any) => typeof val === 'function';
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function isFunction(val: unknown): val is Function {
+    return typeof val === 'function';
+}
+
+export function isPromise<T = any>(val: unknown): val is Promise<T> {
+    return is(val, 'Promise') && isObject(val) && isFunction(val.then) && isFunction(val.catch);
+}
+
+export function isDate(val: unknown): val is Date {
+    return is(val, 'Date');
+}
+
+export function isRegExp(val: unknown): val is RegExp {
+    return is(val, 'RegExp');
+}
+
+export function isWindow(val: any): val is Window {
+    return typeof window !== 'undefined' && is(val, 'Window');
+}
+
+export function isElement(val: unknown): val is Element {
+    return isObject(val) && !!val.tagName;
+}
+
+export const isServer = typeof window === 'undefined';
+
+export const isClient = !isServer;
