@@ -44,3 +44,5 @@ export type { HttpErrorProps } from './error';
 
 export { openLink } from './link';
 export type { Target } from './link';
+
+export { storageSession, storageLocal } from './storage';
