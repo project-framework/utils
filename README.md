@@ -213,6 +213,20 @@ function http (url) {
    storageSession.clear();
   
    // storageLocal 同理
+  ```
+
+- [buildUUID](https://github.com/project-framework/utils/blob/main/packages/uuid/index.ts#L6) 创建 UUID
+
+  ```js
+  import { buildUUID, buildShortUUID } from '@zerozhang/utils';
+  
+  // 生成32位的 uuid：5e4b0c9590f44163a8e76b63ae2ec00a
+  const uuid = buildUUID();
+  
+   // 生成24位带有默认前缀 '_' 的 uuid：_87657121411703147772655
+  const shortUuid1 = buildShortUUID();
+  const shortUuid2 = buildShortUUID('$'); // 自定义前缀
+  ```
 
 ### 数学
 
