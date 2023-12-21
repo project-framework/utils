@@ -129,17 +129,33 @@ console.log(isEmpty([1])) // 输出 false
 
 - [isNullOrUnDef](https://github.com/project-framework/utils/blob/main/packages/is/index.ts#L12) 验证是否是 null 或 undefined
 
-- [isObject](https://github.com/project-framework/utils/blob/main/packages/is/index.ts#L14) 验证是否是对象
+- [isString](https://github.com/project-framework/utils/blob/main/packages/is/index.ts#L14) 验证是否是字符串
 
-- [isString](https://github.com/project-framework/utils/blob/main/packages/is/index.ts#L16) 验证是否是字符串
+- [isNumber](https://github.com/project-framework/utils/blob/main/packages/is/index.ts#L16) 验证是否是数字
 
-- [isNumber](https://github.com/project-framework/utils/blob/main/packages/is/index.ts#L18) 验证是否是数字
+- [isBoolean](https://github.com/project-framework/utils/blob/main/packages/is/index.ts#L20) 验证是否是布尔值
 
-- [isArray](https://github.com/project-framework/utils/blob/main/packages/is/index.ts#L22) 验证是否是数组
+- [isObject](https://github.com/project-framework/utils/blob/main/packages/is/index.ts#L24) 验证是否是对象
 
-- [isFunction](https://github.com/project-framework/utils/blob/main/packages/is/index.ts#L42) 验证是否是函数
+- [isArray](https://github.com/project-framework/utils/blob/main/packages/is/index.ts#L26) 验证是否是数组
 
-- [isEmpty](https://github.com/project-framework/utils/blob/main/packages/is/index.ts#L24) 验证对象、数组、Map、Set 是否为空
+- [isFunction](https://github.com/project-framework/utils/blob/main/packages/is/index.ts#L47) 验证是否是函数
+
+- [isPromise](https://github.com/project-framework/utils/blob/main/packages/is/index.ts#L51) 验证是否是 Promise
+
+- [isDate](https://github.com/project-framework/utils/blob/main/packages/is/index.ts#L60) 验证是否是日期
+
+- [isRegExp](https://github.com/project-framework/utils/blob/main/packages/is/index.ts#L64) 验证是否是正则表达式
+
+- [isWindow](https://github.com/project-framework/utils/blob/main/packages/is/index.ts#L68) 验证是否是 Window 对象
+
+- [isElement](https://github.com/project-framework/utils/blob/main/packages/is/index.ts#L72) 验证是否是 DOM 元素
+
+- [isServer](https://github.com/project-framework/utils/blob/main/packages/is/index.ts#L72) 验证是否是服务端
+
+- [isClient](https://github.com/project-framework/utils/blob/main/packages/is/index.ts#L72) 验证是否是客户端
+
+- [isEmpty](https://github.com/project-framework/utils/blob/main/packages/is/index.ts#L28) 验证对象、数组、Map、Set 是否为空
 
   ```js
     import { isEmpty } from '@zerozhang/utils';

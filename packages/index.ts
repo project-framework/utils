@@ -15,6 +15,14 @@ export {
     isArray,
     isEmpty,
     isFunction,
+    isBoolean,
+    isPromise,
+    isDate,
+    isRegExp,
+    isWindow,
+    isElement,
+    isServer,
+    isClient,
 } from './is';
 
 export { jsonParser } from './json';
