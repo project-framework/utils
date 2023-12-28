@@ -611,8 +611,8 @@ getNodesByProp({ value: 212 }, data, 'value'); // output: ['2', '2-01', '2-02-02
                    // 线性渐变
                    lineGradient: [
                        { value: 0, color: 'magenta' },
-                    { value: 0.5, color: 'blue' },
-                    { value: 1.0, color: 'red' },
+                       { value: 0.5, color: 'blue' },
+                       { value: 1.0, color: 'red' },
                    ]
                },
            })
@@ -679,11 +679,11 @@ getNodesByProp({ value: 212 }, data, 'value'); // output: ['2', '2-01', '2-02-02
  };
  ```
 
-**Watermark.set**
+**Watermark.set()**
 
 初始化 Watermark 后，需要调用 `set()` 方法生成一个水印。
 
-**Watermark.render**
+**Watermark.render()**
 
 水印绘制的方法。可以在自适应等需要重新渲染的场景使用。
 
@@ -695,10 +695,10 @@ getNodesByProp({ value: 212 }, data, 'value'); // output: ['2', '2-01', '2-02-02
 | canvasAttrs     | 可选     | CanvasAttributes | 绘制 canvas 的属性              |
 | forceRender     | 可选     | boolean          | 是否强制渲染 canvas，默认 false |
 
-**Watermark.reset**
+**Watermark.reset()**
 
 水印重置的方法。调用后会恢复到一开始初始化实例的样子。
 
-**Watermark.clear**
+**Watermark.clear()**
 
 水印彻底删除的方法。调用后删除水印，移除所有配置项并将其初始化成默认值。此时，需要重新 `new Watermark()` 才能继续使用。
