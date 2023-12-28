@@ -1,7 +1,7 @@
 {
   "name": "@zerozhang/utils",
   "description": "前端业务代码常用工具库",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": "Zamir Zhang<https://github.com/Zhangyao719>",
   "keywords": [
     "utils",
