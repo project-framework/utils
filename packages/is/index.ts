@@ -3,7 +3,9 @@ const toString = Object.prototype.toString;
 
 export const is = (val: unknown, type: string) => toString.call(val) === `[object ${type}]`;
 
-export const isDef = (val: any) => typeof val !== 'undefined';
+export function isDef<T = unknown>(val?: T): val is T {
+    return typeof val !== 'undefined';
+}
 
 export const isUnDef = (val: any): val is undefined => !isDef(val);
 
@@ -66,6 +68,10 @@ export function isWindow(val: any): val is Window {
 
 export function isElement(val: unknown): val is Element {
     return isObject(val) && !!val.tagName;
+}
+
+export function isHTMLElement(val: unknown): val is HTMLElement {
+    return isObject(val) && 'accessKey' in val;
 }
 
 export const isServer = typeof window === 'undefined';

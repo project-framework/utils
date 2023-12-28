@@ -48,3 +48,6 @@ export type { Target } from './link';
 export { storageSession, storageLocal } from './storage';
 
 export { buildUUID, buildShortUUID } from './uuid';
+
+export { default as Watermark } from './watermark';
+export type { CanvasAttributes, WatermarkOptions, RenderOptions } from './watermark';
