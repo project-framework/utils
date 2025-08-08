@@ -1,5 +1,12 @@
 # 更新日志
 
+## 1.0.6 (2025-08-08)
+
+## 🚀 Features
+
+- 添加 `calculateDistance` 方法，计算两地理坐标间的距离
+- 添加 `getPosition` 获取当前位置坐标
+
 ## 1.0.5 (2023-12-28)
 
 ## 🚀 Features
